@@ -8,7 +8,7 @@ In an empty directory (the 'working directory'), on a machine with Docker instal
 1. In the master branch of this repository, find the scripts directory, and copy the file cfht_run.sh to the working directory. e.g.:
 
   ```
-  wget https://raw.github.com/opencadc/cfht2caom2/master/scripts/cfht_run.sh
+  wget https://raw.github.com/opencadc-metadata-curation/cfht2caom2/master/scripts/cfht_run.sh
   ```
 
 2. Ensure the script is executable:

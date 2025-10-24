@@ -71,7 +71,7 @@ RUN cd /usr/local/src && \
     rm -rf /usr/local/src/h5check-${H5CHECK_VERSION}
 
 ARG OPENCADC_BRANCH=main
-ARG OPENCADC_REPO=opencadc
+ARG OPENCADC_REPO=opencadc-metadata-curation
 RUN git clone https://github.com/opencadc/caom2tools.git && \
     cd caom2tools && \
     pip install ./caom2utils && \
