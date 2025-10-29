@@ -23,7 +23,7 @@ chmod +x cfht_run.sh
 ./cfht_run.sh
 ```
 
-4. The `config.yml` file is configuration information for the ingestion. This file will be created in the executing directory the first time the script `cfht_run.sh` is run. It will work with the files names and described here. For a complete description of its content, see https://github.com/opencadc/collection2caom2/wiki/config.yml.
+4. The `config.yml` file is configuration information for the ingestion. This file will be created in the executing directory the first time the script `cfht_run.sh` is run. It will work with the files names and described here. For a complete description of its content, see https://github.com/opencadc-metadata-curation/collection2caom2/wiki/config.yml.
 
 5. The ways to tell this tool the work to be done:
 
