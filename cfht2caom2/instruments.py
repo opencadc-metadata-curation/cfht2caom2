@@ -484,36 +484,51 @@ class AuxiliaryType(cc.TelescopeMapping2):
         # release date for the QSO data is indicated in the fits headers by
         # the keyword REL_DATE."
 
-        result = self._headers[ext].get('REL_DATE')
-        if result is None:
-            date_obs = self._headers[ext].get('DATE-OBS')
-            run_id = self._get_run_id(ext)
-            if run_id is not None:
-                if run_id == 'SMEARING' or run_id == 'setup':
-                    result = self._headers[ext].get('DATE')
-                elif (
-                    len(run_id) >= 4 and (run_id[3].lower() == 'e' or run_id[3].lower() == 'q')
-                ) and date_obs is not None:
-                    result = f'{date_obs}T00:00:00'
+        # From Chris Usher at CFHT, 28-04-26:
+        # have Q and E programs always use the immediate release logic even if REL_DATE already exists
+        # It is always the case that these programs should be immediate release, which means if something else ended
+        # up as the REL_DATE, it was probably a mistake when the program was set up.
+
+        run_id = self._get_run_id(ext)
+        date_obs = self._headers[ext].get('DATE-OBS')
+        rel_date = self._headers[ext].get('REL_DATE')
+
+        def other_rel_dates():
+            result = None
+            obs_intent = self.get_obs_intent(ext)
+            if obs_intent == ObservationIntentType.CALIBRATION:
+                # from caom2IngestMegacamdetrend.py, l445
+                result = self._headers[ext].get('DATE')
+                if result is None:
+                    result = self._headers[ext].get('TVSTART')
+            if result is None and run_id is not None:
+                self._logger.warning(f'REL_DATE not in header. Derive from RUNID {run_id}.')
+                semester = mc.to_int(run_id[0:2])
+                rel_year = 2000 + semester + 1
+                if run_id[2] == 'A':
+                    result = f'{rel_year}-08-31T00:00:00'
                 else:
-                    obs_intent = self.get_obs_intent(ext)
-                    if obs_intent == ObservationIntentType.CALIBRATION:
-                        # from caom2IngestMegacamdetrend.py, l445
-                        result = self._headers[ext].get('DATE')
-                        if result is None:
-                            result = self._headers[ext].get('TVSTART')
-                    if result is None:
-                        self._logger.warning(
-                            f'REL_DATE not in header. Derive from RUNID '
-                            f'{run_id}.'
-                        )
-                        semester = mc.to_int(run_id[0:2])
-                        rel_year = 2000 + semester + 1
-                        if run_id[2] == 'A':
-                            result = f'{rel_year}-08-31T00:00:00'
-                        else:
-                            rel_year += 1
-                            result = f'{rel_year}-02-28T00:00:00'
+                    rel_year += 1
+                    result = f'{rel_year}-02-28T00:00:00'
+            return result
+
+        if run_id is None:
+            if rel_date is None:
+                result = other_rel_dates()
+            else:
+                result = rel_date
+        else:
+            if run_id == 'SMEARING' or run_id == 'setup':
+                result = self._headers[ext].get('DATE')
+            elif len(run_id) >= 4 and run_id != '17BE' and(run_id[3].lower() == 'e' or run_id[3].lower() == 'q'):
+                # 17BE - a well-known default value that indicates the past
+                if date_obs is not None:
+                    result = f'{date_obs}T00:00:00'
+            else:
+                if rel_date is None:
+                    result = other_rel_dates()
+                else:
+                    result = rel_date
         return result
 
     def get_product_type(self, ext):

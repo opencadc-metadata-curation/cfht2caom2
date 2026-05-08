@@ -35,7 +35,7 @@
     <caom2:plane caom2:id="e6b02724-f829-4338-a3b5-7b5dc92e940b" caom2:lastModified="2019-06-05T22:28:44.086" caom2:maxLastModified="2019-11-06T09:15:12.253" caom2:metaChecksum="md5:8ee9f455a7faa4639a5401f8e6cbf734" caom2:accMetaChecksum="md5:6e1ed9433c2a5773b4d0bd5184b26c45" caom2:metaProducer="cfht2caom2/0.3.2">
       <caom2:productID>2401712f</caom2:productID>
       <caom2:metaRelease>2018-04-25T02:34:21.000</caom2:metaRelease>
-      <caom2:dataRelease>2018-04-25T02:34:21.000</caom2:dataRelease>
+      <caom2:dataRelease>2018-04-25T00:00:00.000</caom2:dataRelease>
       <caom2:dataProductType>spectrum</caom2:dataProductType>
       <caom2:calibrationLevel>1</caom2:calibrationLevel>
       <caom2:provenance>

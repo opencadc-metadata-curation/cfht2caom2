@@ -46,7 +46,7 @@
     <caom2:plane caom2:id="95c17f38-49f2-47a0-ae45-e9aae80a4a33" caom2:metaProducer="cfht2caom2/0.3.2">
       <caom2:productID>19Bm03.bias.0.40.00</caom2:productID>
       <caom2:metaRelease>2019-11-28T00:00:00.000</caom2:metaRelease>
-      <caom2:dataRelease>2019-12-04T09:54:35.000</caom2:dataRelease>
+      <caom2:dataRelease>2019-11-28T00:00:00.000</caom2:dataRelease>
       <caom2:dataProductType>image</caom2:dataProductType>
       <caom2:calibrationLevel>2</caom2:calibrationLevel>
       <caom2:provenance>
