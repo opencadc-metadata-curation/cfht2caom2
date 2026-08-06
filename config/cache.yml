@@ -2,6 +2,12 @@ energy_defaults:
   MegaPrime.FakeBlank:
     cw: null
     fwhm: null
+  MegaPrime.M4112.MP9403:
+    cw: 4135.3
+    fwhm: 259.5
+  MegaPrime.M4376.MP9404:
+    cw: 4388.8
+    fwhm: 262.3
   MegaPrime.filter_name:
     cw: null
     fwhm: null
